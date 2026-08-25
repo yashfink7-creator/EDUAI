@@ -262,23 +262,6 @@ function CreateLesson({ setCurrentPage, onSave }) {
         </button>
 
 
-        <div className="create-header-title">
-
-          <div className="header-ai-icon">
-            <Icon type="sparkles" size={18} />
-          </div>
-
-          <div>
-            <h1>AI Lesson Planner</h1>
-
-            <p>
-              Create a personalized lesson plan with AI
-            </p>
-          </div>
-
-        </div>
-
-
         <div className="ai-status">
 
           <span className="status-dot"></span>

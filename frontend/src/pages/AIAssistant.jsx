@@ -395,12 +395,9 @@ function AIAssistant({ setCurrentPage }) {
 
 
               <button
+                type="button"
                 className="quick-action"
-                onClick={() =>
-                  handleSuggestion(
-                    "Create a lesson plan for my class."
-                  )
-                }
+                onClick={() => setCurrentPage("create-lesson")}
               >
 
                 <div className="action-icon lesson-icon">
@@ -423,12 +420,9 @@ function AIAssistant({ setCurrentPage }) {
 
 
               <button
+                type="button"
                 className="quick-action"
-                onClick={() =>
-                  handleSuggestion(
-                    "Create a quiz for my students."
-                  )
-                }
+                onClick={() => setCurrentPage("quiz")}
               >
 
                 <div className="action-icon quiz-icon">

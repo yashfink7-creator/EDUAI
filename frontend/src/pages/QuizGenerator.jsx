@@ -108,19 +108,6 @@ function QuizGenerator({ setCurrentPage, onSave }) {
           ← Back to Dashboard
         </button>
 
-        <div className="quiz-title">
-
-          <div className="quiz-title-icon">
-            ✨
-          </div>
-
-          <div>
-            <h1>AI Quiz Generator</h1>
-            <p>Create assessments for your students</p>
-          </div>
-
-        </div>
-
         <div className="ai-status">
           <span></span>
           AI Ready
