@@ -1,0 +1,942 @@
+/* =====================================================
+   QUIZ PAGE
+===================================================== */
+
+.quiz-page {
+
+  min-height: 100vh;
+
+  background: #f7f7fa;
+
+  color: #202027;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.quiz-header {
+
+  min-height: 75px;
+
+  padding: 0 40px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e8e8ed;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+
+.back-button {
+
+  border: none;
+
+  background: transparent;
+
+  color: #777781;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+
+.back-button:hover {
+
+  color: #7041d5;
+
+}
+
+
+.quiz-title {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+}
+
+
+.quiz-title-icon {
+
+  width: 40px;
+
+  height: 40px;
+
+  border-radius: 11px;
+
+  background: #eee8ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 18px;
+
+}
+
+
+.quiz-title h1 {
+
+  margin: 0;
+
+  font-size: 16px;
+
+  font-weight: 750;
+
+}
+
+
+.quiz-title p {
+
+  margin: 3px 0 0;
+
+  color: #9999a3;
+
+  font-size: 9px;
+
+}
+
+
+.ai-status {
+
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  background: #f2faf5;
+
+  color: #38865a;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+}
+
+
+.ai-status span {
+
+  width: 6px;
+
+  height: 6px;
+
+  margin-right: 6px;
+
+  display: inline-block;
+
+  border-radius: 50%;
+
+  background: #48a86c;
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.quiz-container {
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 40px 35px 70px;
+
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.quiz-intro {
+
+  margin-bottom: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+
+.small-heading {
+
+  color: #7041d5;
+
+  font-size: 9px;
+
+  font-weight: 750;
+
+  letter-spacing: 1px;
+
+}
+
+
+.quiz-intro h2 {
+
+  margin: 7px 0;
+
+  font-size: 28px;
+
+  letter-spacing: -1px;
+
+}
+
+
+.quiz-intro p {
+
+  margin: 0;
+
+  color: #8b8c95;
+
+  font-size: 11px;
+
+}
+
+
+.intro-icon {
+
+  width: 75px;
+
+  height: 75px;
+
+  border-radius: 20px;
+
+  background: #eee8ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 30px;
+
+}
+
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+.settings-card {
+
+  padding: 28px;
+
+  border: 1px solid #e4e4ea;
+
+  border-radius: 17px;
+
+  background: #ffffff;
+
+  box-shadow: 0 8px 25px rgba(30, 25, 40, 0.035);
+
+}
+
+
+.section-title {
+
+  padding-bottom: 20px;
+
+  margin-bottom: 22px;
+
+  border-bottom: 1px solid #eeeeF2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+
+.section-icon {
+
+  width: 37px;
+
+  height: 37px;
+
+  border-radius: 10px;
+
+  background: #f0eaff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+
+.section-title h3 {
+
+  margin: 0;
+
+  font-size: 13px;
+
+}
+
+
+.section-title p {
+
+  margin: 3px 0 0;
+
+  color: #9999a3;
+
+  font-size: 9px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+
+}
+
+
+.form-group label {
+
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #44454c;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+}
+
+
+.form-group label span {
+
+  color: #dc5965;
+
+}
+
+
+.form-group input,
+
+.form-group select {
+
+  width: 100%;
+
+  padding: 11px;
+
+  border: 1px solid #dedee5;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+}
+
+
+.form-group input:focus,
+
+.form-group select:focus {
+
+  border-color: #8d69d3;
+
+  box-shadow: 0 0 0 3px rgba(112, 65, 213, 0.08);
+
+}
+
+
+/* =====================================================
+   GENERATE
+===================================================== */
+
+.generate-button {
+
+  margin-top: 25px;
+
+  padding: 12px 22px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #19131f;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  float: right;
+
+}
+
+
+.generate-button:hover {
+
+  transform: translateY(-1px);
+
+  opacity: 0.92;
+
+}
+
+
+.generate-button:disabled {
+
+  opacity: 0.6;
+
+  cursor: wait;
+
+}
+
+
+/* =====================================================
+   GENERATED SECTION
+===================================================== */
+
+.generated-section {
+
+  clear: both;
+
+  padding-top: 40px;
+
+}
+
+
+.generated-header {
+
+  margin-bottom: 18px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+}
+
+
+.generated-header h2 {
+
+  margin: 5px 0;
+
+  font-size: 22px;
+
+}
+
+
+.generated-header p {
+
+  margin: 0;
+
+  color: #91919b;
+
+  font-size: 9px;
+
+}
+
+
+.save-button {
+
+  padding: 10px 17px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #328357;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+
+.save-button:hover {
+
+  background: #277248;
+
+}
+
+
+/* =====================================================
+   QUESTION CARD
+===================================================== */
+
+.question-card {
+
+  margin-bottom: 15px;
+
+  padding: 22px;
+
+  border: 1px solid #e3e3e9;
+
+  border-radius: 15px;
+
+  background: #ffffff;
+
+}
+
+
+.question-top {
+
+  margin-bottom: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+
+.question-number {
+
+  padding: 7px 11px;
+
+  border-radius: 7px;
+
+  background: #eee8ff;
+
+  color: #7041d5;
+
+  font-size: 9px;
+
+  font-weight: 750;
+
+}
+
+
+.delete-button {
+
+  padding: 7px 10px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: #fff0f1;
+
+  color: #c85c66;
+
+  font-family: inherit;
+
+  font-size: 8px;
+
+  cursor: pointer;
+
+}
+
+
+.question-input {
+
+  width: 100%;
+
+  min-height: 65px;
+
+  padding: 11px;
+
+  border: 1px solid #dedee5;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  resize: vertical;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+}
+
+
+.question-input:focus {
+
+  border-color: #8d69d3;
+
+}
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.options {
+
+  margin-top: 14px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+}
+
+
+.option {
+
+  min-height: 43px;
+
+  padding: 5px 8px;
+
+  border: 1px solid #e0e0e6;
+
+  border-radius: 9px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+}
+
+
+.option.correct {
+
+  border-color: #9dd2b1;
+
+  background: #f5fbf7;
+
+}
+
+
+.answer-button {
+
+  width: 27px;
+
+  height: 27px;
+
+  border: 1px solid #d5d5dc;
+
+  border-radius: 7px;
+
+  background: #f7f7f9;
+
+  color: #777781;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+
+.option.correct .answer-button {
+
+  border-color: #429465;
+
+  background: #429465;
+
+  color: #ffffff;
+
+}
+
+
+.option input {
+
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+}
+
+
+.correct-text {
+
+  padding: 4px 7px;
+
+  border-radius: 15px;
+
+  background: #e0f3e7;
+
+  color: #39845a;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+}
+
+
+/* =====================================================
+   ADD QUESTION
+===================================================== */
+
+.add-question {
+
+  width: 100%;
+
+  padding: 14px;
+
+  border: 1px dashed #c8bcdc;
+
+  border-radius: 10px;
+
+  background: #faf8ff;
+
+  color: #7041d5;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+
+.add-question:hover {
+
+  background: #f2edfc;
+
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-state {
+
+  clear: both;
+
+  min-height: 230px;
+
+  margin-top: 35px;
+
+  border: 1px dashed #d4d4dd;
+
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+}
+
+
+.empty-icon {
+
+  width: 55px;
+
+  height: 55px;
+
+  margin-bottom: 12px;
+
+  border-radius: 15px;
+
+  background: #eee8ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 23px;
+
+}
+
+
+.empty-state h3 {
+
+  margin: 0;
+
+  font-size: 12px;
+
+}
+
+
+.empty-state p {
+
+  margin: 6px 20px;
+
+  color: #9999a3;
+
+  font-size: 9px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 850px) {
+
+  .form-grid {
+
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .quiz-header {
+
+    padding: 15px;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+  }
+
+  .quiz-title {
+
+    order: -1;
+
+    width: 100%;
+
+  }
+
+  .ai-status {
+
+    display: none;
+
+  }
+
+  .quiz-container {
+
+    padding: 25px 15px;
+
+  }
+
+  .quiz-intro h2 {
+
+    font-size: 22px;
+
+  }
+
+  .intro-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+  }
+
+  .settings-card {
+
+    padding: 18px;
+
+  }
+
+  .form-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .generate-button {
+
+    width: 100%;
+
+    float: none;
+
+  }
+
+  .generated-section {
+
+    padding-top: 25px;
+
+  }
+
+  .generated-header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+  }
+
+  .save-button {
+
+    width: 100%;
+
+  }
+
+}
