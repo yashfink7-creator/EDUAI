@@ -163,7 +163,7 @@ DASHBOARD
 =========================================================
 */
 
-function Dashboard({ setCurrentPage, library }) {
+function Dashboard({ setCurrentPage, library, libraryLoading, libraryError, onSignOut }) {
   return (
     <div className="dashboard">
 
@@ -258,7 +258,11 @@ function Dashboard({ setCurrentPage, library }) {
           <div className="profile-details">
             <strong>Teacher</strong>
             <span>Educator</span>
+            {libraryLoading && <small>Syncing library...</small>}
+            {libraryError && <small className="library-sync-error">{libraryError}</small>}
           </div>
+
+          <button type="button" className="logout-button" onClick={onSignOut}>Sign out</button>
 
         </div>
 

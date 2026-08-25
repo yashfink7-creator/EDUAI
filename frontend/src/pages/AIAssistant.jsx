@@ -159,61 +159,6 @@ function AIAssistant({ setCurrentPage }) {
 
 
         {/* =================================================
-            HERO
-        ================================================= */}
-
-        <section className="assistant-hero">
-
-          <div className="hero-content">
-
-            <div className="hero-label">
-              AI-POWERED TEACHING
-            </div>
-
-            <h2>
-              Teach smarter.
-              <br />
-              <span>Inspire more.</span>
-            </h2>
-
-            <p>
-              Get instant help with lesson planning,
-              classroom activities, quizzes, explanations
-              and student engagement.
-            </p>
-
-          </div>
-
-
-          <div className="hero-visual">
-
-            <div className="orb orb-one"></div>
-
-            <div className="orb orb-two"></div>
-
-            <div className="brain-icon">
-              🧠
-            </div>
-
-            <div className="floating-card card-one">
-              📚 Lesson Ideas
-            </div>
-
-            <div className="floating-card card-two">
-              ✨ AI Suggestions
-            </div>
-
-            <div className="floating-card card-three">
-              📝 Smart Quizzes
-            </div>
-
-          </div>
-
-        </section>
-
-
-
-        {/* =================================================
             CONTENT GRID
         ================================================= */}
 

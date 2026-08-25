@@ -3,7 +3,7 @@ import "../styles/QuizGenerator.css";
 import { generateQuiz as requestQuiz } from "../services/api";
 import { saveQuiz } from "../services/storage";
 
-function QuizGenerator({ setCurrentPage, onSave }) {
+function QuizGenerator({ setCurrentPage, onSave, userId }) {
 
   const [subject, setSubject] = useState("");
   const [topic, setTopic] = useState("");
@@ -15,6 +15,7 @@ function QuizGenerator({ setCurrentPage, onSave }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isSaved, setIsSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   // Generate quiz
   const generateQuiz = () => {
@@ -34,10 +35,13 @@ function QuizGenerator({ setCurrentPage, onSave }) {
       .finally(() => setLoading(false));
   };
 
-  const handleSaveQuiz = () => {
-    if (!questions.length || isSaved) return;
+  const handleSaveQuiz = async () => {
+    if (!questions.length || isSaved || isSaving) return;
 
-    const savedQuiz = saveQuiz({
+    setIsSaving(true);
+    setError("");
+    try {
+      const savedQuiz = await saveQuiz({
       title: topic,
       subject,
       topic,
@@ -45,10 +49,15 @@ function QuizGenerator({ setCurrentPage, onSave }) {
       difficulty,
       questions,
       savedAt: new Date().toISOString(),
-    });
+      }, userId);
 
-    onSave("quizzes", savedQuiz);
-    setIsSaved(true);
+      onSave("quizzes", savedQuiz);
+      setIsSaved(true);
+    } catch (saveError) {
+      setError(saveError.message);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
 
@@ -388,9 +397,9 @@ function QuizGenerator({ setCurrentPage, onSave }) {
               <button
                 className="save-button"
                 onClick={handleSaveQuiz}
-                disabled={isSaved}
+                disabled={isSaved || isSaving}
               >
-                {isSaved ? "Saved to My Quizzes" : "Save Quiz"}
+                {isSaved ? "Saved to My Quizzes" : isSaving ? "Saving..." : "Save Quiz"}
               </button>
 
             </div>

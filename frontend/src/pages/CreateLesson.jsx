@@ -111,7 +111,7 @@ const getVisualType = (type = "") => {
 };
 
 
-function CreateLesson({ setCurrentPage, onSave }) {
+function CreateLesson({ setCurrentPage, onSave, userId }) {
 
   const [formData, setFormData] = useState({
     subject: "",
@@ -130,6 +130,7 @@ function CreateLesson({ setCurrentPage, onSave }) {
   const [generatedLesson, setGeneratedLesson] = useState(null);
   const [error, setError] = useState("");
   const [isSaved, setIsSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
 
   /*
@@ -223,10 +224,13 @@ function CreateLesson({ setCurrentPage, onSave }) {
 
   };
 
-  const handleSaveLesson = () => {
-    if (!generatedLesson || isSaved) return;
+  const handleSaveLesson = async () => {
+    if (!generatedLesson || isSaved || isSaving) return;
 
-    const savedLesson = saveLesson({
+    setIsSaving(true);
+    setError("");
+    try {
+      const savedLesson = await saveLesson({
       title: generatedLesson.title || formData.topic,
       subject: formData.subject,
       topic: formData.topic,
@@ -235,10 +239,15 @@ function CreateLesson({ setCurrentPage, onSave }) {
       teachingStyle: formData.teachingStyle,
       plan: generatedLesson,
       savedAt: new Date().toISOString(),
-    });
+      }, userId);
 
-    onSave("lessons", savedLesson);
-    setIsSaved(true);
+      onSave("lessons", savedLesson);
+      setIsSaved(true);
+    } catch (saveError) {
+      setError(saveError.message);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
 
@@ -890,8 +899,8 @@ function CreateLesson({ setCurrentPage, onSave }) {
                 <h2>{generatedLesson.title}</h2>
                 <p>Built for {formData.teachingStyle.toLowerCase()} learning.</p>
               </div>
-              <button className="result-save-button" onClick={handleSaveLesson} disabled={isSaved}>
-                <Icon type="check" size={15} /> {isSaved ? "Saved to My Lessons" : "Save Lesson"}
+              <button className="result-save-button" onClick={handleSaveLesson} disabled={isSaved || isSaving}>
+                <Icon type="check" size={15} /> {isSaved ? "Saved to My Lessons" : isSaving ? "Saving..." : "Save Lesson"}
               </button>
             </div>
 
