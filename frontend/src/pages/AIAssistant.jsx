@@ -1,7 +1,13 @@
 import { useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import "../styles/AIAssistant.css";
+import { askAssistant } from "../services/api";
 
-function AIAssistant() {
+function AIAssistant({ setCurrentPage }) {
 
   const messageId = useRef(2);
 
@@ -15,20 +21,27 @@ function AIAssistant() {
   ]);
 
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState("");
 
 
   // =====================================================
   // SEND MESSAGE
   // =====================================================
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
 
     if (!message.trim()) return;
+
+    const submittedMessage = message.trim();
+    const history = messages.slice(-8).map((item) => ({
+      role: item.sender === "user" ? "user" : "assistant",
+      text: item.text,
+    }));
 
     const userMessage = {
       id: messageId.current++,
       sender: "user",
-      text: message
+      text: submittedMessage
     };
 
     setMessages((previous) => [
@@ -38,68 +51,25 @@ function AIAssistant() {
 
     setMessage("");
     setIsTyping(true);
+    setError("");
 
-
-    // -------------------------------------------------
-    // TEMPORARY AI RESPONSE
-    // -------------------------------------------------
-    // Later this section can be replaced with your
-    // actual AI API / PHP backend.
-    // -------------------------------------------------
-
-    setTimeout(() => {
-
+    try {
+      const { response } = await askAssistant(submittedMessage, history);
       const aiMessage = {
         id: messageId.current++,
         sender: "ai",
-        text: generateDemoResponse(message)
+        text: response,
       };
 
       setMessages((previous) => [
         ...previous,
         aiMessage
       ]);
-
+    } catch (requestError) {
+      setError(requestError.message);
+    } finally {
       setIsTyping(false);
-
-    }, 900);
-  };
-
-
-  // =====================================================
-  // DEMO RESPONSE
-  // =====================================================
-
-  const generateDemoResponse = (userMessage) => {
-
-    const text = userMessage.toLowerCase();
-
-    if (text.includes("lesson")) {
-
-      return "Absolutely! I can help you design a lesson plan with learning objectives, activities, teaching methods, required materials, and an assessment section. Tell me the subject, grade, and topic.";
-
     }
-
-    if (text.includes("quiz")) {
-
-      return "I can help you create a quiz. Tell me the subject, topic, grade level, difficulty, and number of questions you'd like.";
-
-    }
-
-    if (text.includes("activity")) {
-
-      return "For an engaging classroom activity, you can use a Think-Pair-Share exercise, a short group challenge, a real-world case study, or a quick interactive quiz.";
-
-    }
-
-    if (text.includes("student")) {
-
-      return "To improve student engagement, try combining short explanations with questions, collaborative activities, visual examples, and quick knowledge checks.";
-
-    }
-
-    return "That's a great teaching question! I can help you with lesson planning, quizzes, classroom activities, explanations, student engagement, and assessment strategies. Tell me more about what you're teaching.";
-
   };
 
 
@@ -141,6 +111,14 @@ function AIAssistant() {
       ================================================= */}
 
       <header className="assistant-header">
+
+        <button
+          type="button"
+          className="assistant-back"
+          onClick={() => setCurrentPage("dashboard")}
+        >
+          ← Dashboard
+        </button>
 
         <div className="assistant-brand">
 
@@ -312,7 +290,14 @@ function AIAssistant() {
                         : "message ai-message"
                     }
                   >
-                    {item.text}
+                    {item.sender === "ai" ? (
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
+                      >
+                        {item.text}
+                      </ReactMarkdown>
+                    ) : item.text}
                   </div>
 
                 </div>
@@ -342,6 +327,12 @@ function AIAssistant() {
 
               )}
 
+              {error && (
+                <p className="assistant-error" role="alert">
+                  {error}
+                </p>
+              )}
+
             </div>
 
 
@@ -360,9 +351,10 @@ function AIAssistant() {
               />
 
               <button
+                type="button"
                 className="send-button"
                 onClick={sendMessage}
-                disabled={!message.trim()}
+                disabled={!message.trim() || isTyping}
               >
                 ➤
               </button>

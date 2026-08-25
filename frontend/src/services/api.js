@@ -19,4 +19,5 @@ export const generateLesson = (details) => request("/api/generate-lesson", detai
 
 export const generateQuiz = (details) => request("/api/generate-quiz", details);
 
-export const askAssistant = (message) => request("/api/assistant", { message });
+export const askAssistant = (message, history = []) =>
+	request("/api/assistant", { message, history });

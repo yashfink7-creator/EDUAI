@@ -111,6 +111,38 @@ Return exactly this shape: {"questions": [{"question": string, "options": [strin
   }
 });
 
+app.post("/api/assistant", async (req, res) => {
+  try {
+    const { message, history = [] } = req.body;
+
+    if (!message || !message.trim()) {
+      return res.status(400).json({ error: "message is required" });
+    }
+
+    const conversation = history
+      .slice(-8)
+      .map((item) => `${item.role === "user" ? "Teacher" : "Assistant"}: ${item.text}`)
+      .join("\n");
+
+    const response = await ai.models.generateContent({
+      model,
+      contents: `You are EDUAI, a practical and encouraging teaching assistant. Give accurate, classroom-ready guidance. Use concise headings or bullets when helpful. If the teacher asks for a lesson or quiz, provide a useful starting point and ask only for missing details.
+
+Recent conversation:
+${conversation}
+
+Teacher: ${message}
+
+Assistant:`,
+    });
+
+    res.json({ response: response.text });
+  } catch (error) {
+    console.error("Assistant error:", error);
+    res.status(500).json({ error: error.message || String(error) });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`EDUAI backend running on http://localhost:${PORT}`);
 });
