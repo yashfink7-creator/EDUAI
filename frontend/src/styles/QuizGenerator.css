@@ -510,6 +510,11 @@
 
 }
 
+.save-button:disabled {
+  background: #7db493;
+  cursor: default;
+}
+
 
 /* =====================================================
    QUESTION CARD

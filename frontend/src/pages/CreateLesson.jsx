@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/CreateLesson.css";
+import { generateLesson } from "../services/api";
+import { saveLesson } from "../services/storage";
 
 function Icon({ type, size = 20 }) {
   const icons = {
@@ -101,8 +103,15 @@ function Icon({ type, size = 20 }) {
   );
 }
 
+const getVisualType = (type = "") => {
+  const normalized = type.toLowerCase();
+  if (normalized.includes("diagram") || normalized.includes("flow")) return "diagram";
+  if (normalized.includes("example") || normalized.includes("board")) return "example";
+  return "prompt";
+};
 
-function CreateLesson({ setCurrentPage }) {
+
+function CreateLesson({ setCurrentPage, onSave }) {
 
   const [formData, setFormData] = useState({
     subject: "",
@@ -118,6 +127,9 @@ function CreateLesson({ setCurrentPage }) {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const [generated, setGenerated] = useState(false);
+  const [generatedLesson, setGeneratedLesson] = useState(null);
+  const [error, setError] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
 
 
   /*
@@ -158,7 +170,7 @@ function CreateLesson({ setCurrentPage }) {
   Generated lesson
   */
 
-  const handleGenerate = (event) => {
+  const handleGenerate = async (event) => {
 
     event.preventDefault();
 
@@ -168,14 +180,19 @@ function CreateLesson({ setCurrentPage }) {
     }
 
     setIsGenerating(true);
+    setError("");
 
-    setTimeout(() => {
-
-      setIsGenerating(false);
-
+    try {
+      const { lesson } = await generateLesson(formData);
+      setGeneratedLesson(lesson);
       setGenerated(true);
-
-    }, 1200);
+      setIsSaved(false);
+    } catch (requestError) {
+      setGenerated(false);
+      setError(requestError.message);
+    } finally {
+      setIsGenerating(false);
+    }
 
   };
 
@@ -200,7 +217,28 @@ function CreateLesson({ setCurrentPage }) {
     });
 
     setGenerated(false);
+    setGeneratedLesson(null);
+    setError("");
+    setIsSaved(false);
 
+  };
+
+  const handleSaveLesson = () => {
+    if (!generatedLesson || isSaved) return;
+
+    const savedLesson = saveLesson({
+      title: generatedLesson.title || formData.topic,
+      subject: formData.subject,
+      topic: formData.topic,
+      grade: formData.grade,
+      duration: formData.duration,
+      teachingStyle: formData.teachingStyle,
+      plan: generatedLesson,
+      savedAt: new Date().toISOString(),
+    });
+
+    onSave("lessons", savedLesson);
+    setIsSaved(true);
   };
 
 
@@ -592,6 +630,7 @@ function CreateLesson({ setCurrentPage }) {
                         ? "style-option selected"
                         : "style-option"
                     }
+                    aria-pressed={formData.teachingStyle === "Interactive"}
                     onClick={() =>
                       setFormData({
                         ...formData,
@@ -600,7 +639,7 @@ function CreateLesson({ setCurrentPage }) {
                     }
                   >
 
-                    <span>🎯</span>
+                    <span className="style-icon"><Icon type="target" size={18} /></span>
 
                     <div>
                       <strong>Interactive</strong>
@@ -618,6 +657,7 @@ function CreateLesson({ setCurrentPage }) {
                         ? "style-option selected"
                         : "style-option"
                     }
+                    aria-pressed={formData.teachingStyle === "Visual"}
                     onClick={() =>
                       setFormData({
                         ...formData,
@@ -626,7 +666,7 @@ function CreateLesson({ setCurrentPage }) {
                     }
                   >
 
-                    <span>🎨</span>
+                    <span className="style-icon"><Icon type="lightbulb" size={18} /></span>
 
                     <div>
                       <strong>Visual</strong>
@@ -644,6 +684,7 @@ function CreateLesson({ setCurrentPage }) {
                         ? "style-option selected"
                         : "style-option"
                     }
+                    aria-pressed={formData.teachingStyle === "Discussion"}
                     onClick={() =>
                       setFormData({
                         ...formData,
@@ -652,7 +693,7 @@ function CreateLesson({ setCurrentPage }) {
                     }
                   >
 
-                    <span>💬</span>
+                    <span className="style-icon"><Icon type="users" size={18} /></span>
 
                     <div>
                       <strong>Discussion</strong>
@@ -662,6 +703,12 @@ function CreateLesson({ setCurrentPage }) {
                   </button>
 
                 </div>
+
+                <p className="style-guidance">
+                  {formData.teachingStyle === "Interactive" && "Best for movement, practice, and collaborative learning."}
+                  {formData.teachingStyle === "Visual" && "Best for diagrams, examples, demonstrations, and visual memory."}
+                  {formData.teachingStyle === "Discussion" && "Best for questioning, debate, reflection, and student voice."}
+                </p>
 
               </div>
 
@@ -748,6 +795,8 @@ function CreateLesson({ setCurrentPage }) {
 
             </form>
 
+            {error && <p className="form-error" role="alert">{error}</p>}
+
           </section>
 
 
@@ -821,74 +870,6 @@ function CreateLesson({ setCurrentPage }) {
             </div>
 
 
-
-            {/* Generated Preview */}
-
-            {generated && (
-
-              <div className="generated-card">
-
-                <div className="generated-title">
-
-                  <div className="success-icon">
-                    <Icon type="check" size={16} />
-                  </div>
-
-                  <div>
-
-                    <h3>
-                      Lesson Ready
-                    </h3>
-
-                    <p>
-                      AI has created your lesson structure.
-                    </p>
-
-                  </div>
-
-                </div>
-
-
-                <div className="generated-details">
-
-                  <div>
-                    <span>Subject</span>
-                    <strong>{formData.subject}</strong>
-                  </div>
-
-                  <div>
-                    <span>Topic</span>
-                    <strong>{formData.topic}</strong>
-                  </div>
-
-                  <div>
-                    <span>Grade</span>
-                    <strong>{formData.grade}</strong>
-                  </div>
-
-                  <div>
-                    <span>Duration</span>
-                    <strong>{formData.duration} min</strong>
-                  </div>
-
-                </div>
-
-
-                <button
-                  className="view-result-button"
-                  onClick={() =>
-                    setCurrentPage("lesson-result")
-                  }
-                >
-                  View Lesson Plan
-                </button>
-
-              </div>
-
-            )}
-
-
-
             {/* Teaching Tip */}
 
             <div className="tip-card">
@@ -917,6 +898,100 @@ function CreateLesson({ setCurrentPage }) {
           </aside>
 
         </div>
+
+        {generated && generatedLesson && (
+          <section className="lesson-result" aria-live="polite">
+            <div className="result-heading">
+              <div>
+                <span className="page-label">GENERATED LESSON PLAN</span>
+                <h2>{generatedLesson.title}</h2>
+                <p>Built for {formData.teachingStyle.toLowerCase()} learning.</p>
+              </div>
+              <button className="result-save-button" onClick={handleSaveLesson} disabled={isSaved}>
+                <Icon type="check" size={15} /> {isSaved ? "Saved to My Lessons" : "Save Lesson"}
+              </button>
+            </div>
+
+            <div className="generated-details">
+              <div><span>Subject</span><strong>{formData.subject}</strong></div>
+              <div><span>Topic</span><strong>{formData.topic}</strong></div>
+              <div><span>Grade</span><strong>{formData.grade}</strong></div>
+              <div><span>Duration</span><strong>{formData.duration} min</strong></div>
+            </div>
+
+            <div className="result-grid">
+              <div className="generated-section">
+                <strong>Introduction</strong>
+                <p>{generatedLesson.introduction}</p>
+              </div>
+
+              <div className="generated-section">
+                <strong>Learning objectives</strong>
+                <ul>{generatedLesson.objectives?.map((objective) => <li key={objective}>{objective}</li>)}</ul>
+              </div>
+
+              <div className="generated-section result-wide">
+                <strong>Teaching activities</strong>
+                <div className="activity-grid">
+                  {generatedLesson.activities?.map((activity) => (
+                    <div className="activity-item" key={activity.title}>
+                      <span>{activity.title}</span><small>{activity.minutes} min</small>
+                      <p>{activity.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {generatedLesson.visualAids?.length > 0 && (
+                <div className="generated-section result-wide visual-toolkit">
+                  <strong>Visual toolkit</strong>
+                  <div className="visual-aids">
+                    {generatedLesson.visualAids.map((aid) => (
+                      <div className={`visual-aid visual-aid-${getVisualType(aid.type)}`} key={aid.title}>
+                        <div className="visual-aid-preview" aria-hidden="true">
+                          {getVisualType(aid.type) === "diagram" && (
+                            <div className="diagram-preview">
+                              <span>Input</span><b>→</b><span>Process</span><b>→</b><span>Result</span>
+                            </div>
+                          )}
+                          {getVisualType(aid.type) === "example" && (
+                            <div className="example-preview">
+                              <span className="example-label">EXAMPLE</span>
+                              <strong>Observe · Connect · Explain</strong>
+                            </div>
+                          )}
+                          {aid.type === "prompt" && (
+                            <div className="prompt-preview">
+                              <span>?</span>
+                              <strong>What do you notice?</strong>
+                            </div>
+                          )}
+                        </div>
+                        <span className="visual-aid-type">{aid.type}</span>
+                        <h4>{aid.title}</h4>
+                        <p>{aid.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="generated-section">
+                <strong>Discussion questions</strong>
+                <ul>{generatedLesson.discussionQuestions?.map((question) => <li key={question}>{question}</li>)}</ul>
+              </div>
+
+              <div className="generated-section">
+                <strong>Assessment questions</strong>
+                <ul>{generatedLesson.assessmentQuestions?.map((question) => <li key={question}>{question}</li>)}</ul>
+              </div>
+
+              <div className="generated-section result-wide homework-block">
+                <strong>Homework</strong><p>{generatedLesson.homework}</p>
+              </div>
+            </div>
+          </section>
+        )}
 
       </main>
 
