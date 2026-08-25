@@ -1,18 +1,46 @@
 import React, { useState } from "react";
+
 import Dashboard from "./pages/Dashboard";
+import CreateLesson from "./pages/CreateLesson";
 
 function App() {
-  // Keeps track of which page we want to show
+
   const [currentPage, setCurrentPage] = useState("dashboard");
 
-  // For now, we are only building the dashboard.
-  // The other pages will be added later.
+
+  /*
+  =========================================================
+  PAGE SWITCHING
+
+  We are NOT using React Router.
+
+  React state decides which page appears.
+  =========================================================
+  */
+
+  if (currentPage === "create-lesson") {
+
+    return (
+      <CreateLesson
+        setCurrentPage={setCurrentPage}
+      />
+    );
+
+  }
+
+
+  /*
+  =========================================================
+  DASHBOARD
+  =========================================================
+  */
+
   return (
     <Dashboard
-      currentPage={currentPage}
       setCurrentPage={setCurrentPage}
     />
   );
+
 }
 
 export default App;
