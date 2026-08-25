@@ -1,10 +1,12 @@
 import React from "react";
-import QuizGenerator from "./pages/QuizGenerator";
+import AIAssistant from "./pages/AIAssistant";
 
 function App() {
+
   return (
-    <QuizGenerator />
+    <AIAssistant />
   );
+
 }
 
 export default App;
