@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/QuizGenerator.css";
+import { generateQuiz as requestQuiz } from "../services/api";
+import { saveQuiz } from "../services/storage";
 
-function QuizGenerator({ setCurrentPage }) {
+function QuizGenerator({ setCurrentPage, onSave }) {
 
   const [subject, setSubject] = useState("");
   const [topic, setTopic] = useState("");
@@ -11,6 +13,8 @@ function QuizGenerator({ setCurrentPage }) {
 
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
 
   // Generate quiz
   const generateQuiz = () => {
@@ -21,74 +25,30 @@ function QuizGenerator({ setCurrentPage }) {
     }
 
     setLoading(true);
+    setError("");
+    setIsSaved(false);
 
-    // Temporary quiz data for frontend testing
-    setTimeout(() => {
+    requestQuiz({ subject, topic, grade, difficulty, questionCount: Number(questionCount) })
+      .then(({ questions: generatedQuestions }) => setQuestions(generatedQuestions))
+      .catch((requestError) => setError(requestError.message))
+      .finally(() => setLoading(false));
+  };
 
-      const sampleQuestions = [
-        {
-          question: `What is the main concept of ${topic}?`,
-          options: [
-            `It is an important concept in ${subject}.`,
-            "It is unrelated to the subject.",
-            "It is only used outside education.",
-            "None of the above."
-          ],
-          answer: 0
-        },
+  const handleSaveQuiz = () => {
+    if (!questions.length || isSaved) return;
 
-        {
-          question: `Why is ${topic} important?`,
-          options: [
-            "It helps students understand the subject better.",
-            "It has no educational value.",
-            "It is only useful for teachers.",
-            "It cannot be applied in real life."
-          ],
-          answer: 0
-        },
+    const savedQuiz = saveQuiz({
+      title: topic,
+      subject,
+      topic,
+      grade,
+      difficulty,
+      questions,
+      savedAt: new Date().toISOString(),
+    });
 
-        {
-          question: `Which statement about ${topic} is correct?`,
-          options: [
-            "It can be understood through examples.",
-            "It cannot be explained.",
-            "It is unrelated to learning.",
-            "It has no practical application."
-          ],
-          answer: 0
-        },
-
-        {
-          question: `How can students learn ${topic} effectively?`,
-          options: [
-            "Through examples, activities and practice.",
-            "By avoiding the topic.",
-            "By memorizing unrelated information.",
-            "By skipping classroom activities."
-          ],
-          answer: 0
-        },
-
-        {
-          question: `Which activity can help assess ${topic}?`,
-          options: [
-            "A quiz or application-based activity.",
-            "An unrelated activity.",
-            "No assessment.",
-            "Ignoring the topic."
-          ],
-          answer: 0
-        }
-      ];
-
-      const count = Number(questionCount);
-
-      setQuestions(sampleQuestions.slice(0, count));
-
-      setLoading(false);
-
-    }, 1000);
+    onSave("quizzes", savedQuiz);
+    setIsSaved(true);
   };
 
 
@@ -407,6 +367,8 @@ function QuizGenerator({ setCurrentPage }) {
 
           </button>
 
+          {error && <p className="form-error" role="alert">{error}</p>}
+
         </section>
 
 
@@ -438,11 +400,10 @@ function QuizGenerator({ setCurrentPage }) {
 
               <button
                 className="save-button"
-                onClick={() =>
-                  alert("Quiz saved successfully!")
-                }
+                onClick={handleSaveQuiz}
+                disabled={isSaved}
               >
-                Save Quiz
+                {isSaved ? "Saved to My Quizzes" : "Save Quiz"}
               </button>
 
             </div>

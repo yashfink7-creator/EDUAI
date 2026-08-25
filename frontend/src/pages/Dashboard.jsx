@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/Dashboard.css";
 
 /*
@@ -232,13 +231,13 @@ function Dashboard({ setCurrentPage }) {
           </p>
 
 
-          <button className="nav-link">
+          <button className="nav-link" onClick={() => setCurrentPage("library")}>
             <Icon type="book" size={18} />
             <span>My Lessons</span>
           </button>
 
 
-          <button className="nav-link">
+          <button className="nav-link" onClick={() => setCurrentPage("library")}>
             <Icon type="quiz" size={18} />
             <span>Resources</span>
           </button>
