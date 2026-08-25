@@ -163,7 +163,7 @@ DASHBOARD
 =========================================================
 */
 
-function Dashboard({ setCurrentPage }) {
+function Dashboard({ setCurrentPage, library }) {
   return (
     <div className="dashboard">
 
@@ -193,13 +193,14 @@ function Dashboard({ setCurrentPage }) {
 
           <p className="nav-title">MAIN</p>
 
-          <button className="nav-link active">
+          <button type="button" className="nav-link active">
             <Icon type="home" size={18} />
             <span>Dashboard</span>
           </button>
 
 
           <button
+            type="button"
             className="nav-link"
             onClick={() => setCurrentPage("create-lesson")}
           >
@@ -209,6 +210,7 @@ function Dashboard({ setCurrentPage }) {
 
 
           <button
+            type="button"
             className="nav-link"
             onClick={() => setCurrentPage("quiz")}
           >
@@ -218,6 +220,7 @@ function Dashboard({ setCurrentPage }) {
 
 
           <button
+            type="button"
             className="nav-link"
             onClick={() => setCurrentPage("assistant")}
           >
@@ -231,15 +234,15 @@ function Dashboard({ setCurrentPage }) {
           </p>
 
 
-          <button className="nav-link" onClick={() => setCurrentPage("library")}>
+          <button type="button" className="nav-link" onClick={() => setCurrentPage("library")}>
             <Icon type="book" size={18} />
-            <span>My Lessons</span>
+            <span>My Library</span>
           </button>
 
 
-          <button className="nav-link" onClick={() => setCurrentPage("library")}>
-            <Icon type="quiz" size={18} />
-            <span>Resources</span>
+          <button type="button" className="nav-link" onClick={() => setCurrentPage("library")}>
+            <Icon type="sparkles" size={18} />
+            <span>Teaching Toolkit</span>
           </button>
 
         </nav>
@@ -292,6 +295,7 @@ function Dashboard({ setCurrentPage }) {
 
 
           <button
+            type="button"
             className="create-button"
             onClick={() => setCurrentPage("create-lesson")}
           >
@@ -328,6 +332,7 @@ function Dashboard({ setCurrentPage }) {
             </p>
 
             <button
+              type="button"
               className="hero-button"
               onClick={() => setCurrentPage("create-lesson")}
             >
@@ -382,7 +387,7 @@ function Dashboard({ setCurrentPage }) {
 
             <div>
               <span>Lessons Created</span>
-              <strong>12</strong>
+              <strong>{library.lessons.length}</strong>
 
               <small className="positive">
                 <Icon type="trend" size={12} />
@@ -401,7 +406,7 @@ function Dashboard({ setCurrentPage }) {
 
             <div>
               <span>Quizzes Generated</span>
-              <strong>48</strong>
+              <strong>{library.quizzes.length}</strong>
 
               <small className="positive">
                 <Icon type="trend" size={12} />
@@ -471,6 +476,7 @@ function Dashboard({ setCurrentPage }) {
             {/* Create Lesson */}
 
             <button
+              type="button"
               className="action-card"
               onClick={() => setCurrentPage("create-lesson")}
             >
@@ -495,6 +501,7 @@ function Dashboard({ setCurrentPage }) {
             {/* AI Assistant */}
 
             <button
+              type="button"
               className="action-card"
               onClick={() => setCurrentPage("assistant")}
             >
@@ -519,6 +526,7 @@ function Dashboard({ setCurrentPage }) {
             {/* Quiz */}
 
             <button
+              type="button"
               className="action-card"
               onClick={() => setCurrentPage("quiz")}
             >
@@ -620,7 +628,7 @@ function Dashboard({ setCurrentPage }) {
                 <button
                   className="open-lesson"
                   onClick={() =>
-                    setCurrentPage("lesson-result")
+                    setCurrentPage("library")
                   }
                 >
                   <Icon type="arrow" size={16} />

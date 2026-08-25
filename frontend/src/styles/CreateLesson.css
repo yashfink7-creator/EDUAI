@@ -31,35 +31,47 @@
   justify-content: space-between;
 
   gap: 20px;
+  position: relative;
 }
 
 
 .back-button {
-  border: none;
-
-  background: transparent;
-
-  color: #747580;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid #dedee5;
+  border-radius: 9px;
+  background: #eee8ff;
+  color: #6040ae;
 
   display: flex;
   align-items: center;
 
-  gap: 8px;
+  gap: 7px;
 
   font-family: inherit;
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
 
   cursor: pointer;
 
   transition: 0.2s ease;
 }
+.create-header > .back-button {
+  position: absolute;
+  top: 21px;
+  left: 42px;
+}
 
 .back-button:hover {
+  border-color: #b9a1e8;
+  background: #e2d8ff;
   color: #6d42d3;
+}
 
-  transform: translateX(-2px);
+.back-button:focus-visible {
+  outline: 3px solid rgba(112,65,213,0.2);
+  outline-offset: 2px;
 }
 
 
@@ -1191,6 +1203,10 @@
     padding: 15px 18px;
 
     flex-wrap: wrap;
+  }
+  .create-header > .back-button {
+    top: 15px;
+    left: 18px;
   }
 
   .create-header-title {

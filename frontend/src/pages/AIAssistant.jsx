@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useRef, useState } from "react";
 import "../styles/AIAssistant.css";
 
 function AIAssistant() {
+
+  const messageId = useRef(2);
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([
@@ -24,7 +26,7 @@ function AIAssistant() {
     if (!message.trim()) return;
 
     const userMessage = {
-      id: Date.now(),
+      id: messageId.current++,
       sender: "user",
       text: message
     };
@@ -48,7 +50,7 @@ function AIAssistant() {
     setTimeout(() => {
 
       const aiMessage = {
-        id: Date.now() + 1,
+        id: messageId.current++,
         sender: "ai",
         text: generateDemoResponse(message)
       };
@@ -105,7 +107,7 @@ function AIAssistant() {
   // SUGGESTED PROMPT
   // =====================================================
 
-  const useSuggestion = (prompt) => {
+  const handleSuggestion = (prompt) => {
 
     setMessage(prompt);
 
@@ -403,7 +405,7 @@ function AIAssistant() {
               <button
                 className="quick-action"
                 onClick={() =>
-                  useSuggestion(
+                  handleSuggestion(
                     "Create a lesson plan for my class."
                   )
                 }
@@ -431,7 +433,7 @@ function AIAssistant() {
               <button
                 className="quick-action"
                 onClick={() =>
-                  useSuggestion(
+                  handleSuggestion(
                     "Create a quiz for my students."
                   )
                 }
@@ -459,7 +461,7 @@ function AIAssistant() {
               <button
                 className="quick-action"
                 onClick={() =>
-                  useSuggestion(
+                  handleSuggestion(
                     "Give me some engaging classroom activities."
                   )
                 }
@@ -487,7 +489,7 @@ function AIAssistant() {
               <button
                 className="quick-action"
                 onClick={() =>
-                  useSuggestion(
+                  handleSuggestion(
                     "Give me ideas to improve student engagement."
                   )
                 }
@@ -541,7 +543,7 @@ function AIAssistant() {
               <button
                 className="prompt-button"
                 onClick={() =>
-                  useSuggestion(
+                  handleSuggestion(
                     "Explain photosynthesis to Grade 7 students."
                   )
                 }
@@ -553,7 +555,7 @@ function AIAssistant() {
               <button
                 className="prompt-button"
                 onClick={() =>
-                  useSuggestion(
+                  handleSuggestion(
                     "Create a fun 15-minute classroom activity."
                   )
                 }
@@ -565,7 +567,7 @@ function AIAssistant() {
               <button
                 className="prompt-button"
                 onClick={() =>
-                  useSuggestion(
+                  handleSuggestion(
                     "How can I assess student understanding?"
                   )
                 }

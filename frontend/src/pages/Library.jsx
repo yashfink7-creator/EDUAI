@@ -2,9 +2,11 @@ import { useState } from "react";
 import "../styles/Library.css";
 
 function Library({ setCurrentPage, library }) {
-  const [activeTab, setActiveTab] = useState("lessons");
   const [selectedItem, setSelectedItem] = useState(null);
-  const items = library[activeTab];
+  const items = [
+    ...library.lessons.map((item) => ({ item, kind: "lesson" })),
+    ...library.quizzes.map((item) => ({ item, kind: "quiz" })),
+  ].sort((first, second) => new Date(second.item.savedAt) - new Date(first.item.savedAt));
 
   if (selectedItem) {
     const isLesson = selectedItem.kind === "lesson";
@@ -12,7 +14,7 @@ function Library({ setCurrentPage, library }) {
 
     return (
       <main className="library-page">
-        <button className="library-back" onClick={() => setSelectedItem(null)}>Back to {isLesson ? "My Lessons" : "My Quizzes"}</button>
+        <button className="library-back" onClick={() => setSelectedItem(null)}>Back to My Library</button>
         <section className="resource-detail">
           <div className="resource-detail-heading">
             <div>
@@ -50,27 +52,28 @@ function Library({ setCurrentPage, library }) {
         </div>
       </header>
 
-      <div className="library-tabs" role="tablist">
-        <button className={activeTab === "lessons" ? "active" : ""} onClick={() => setActiveTab("lessons")} role="tab">My Lessons ({library.lessons.length})</button>
-        <button className={activeTab === "quizzes" ? "active" : ""} onClick={() => setActiveTab("quizzes")} role="tab">My Quizzes ({library.quizzes.length})</button>
+      <div className="library-summary">
+        <span>{library.lessons.length} lessons</span>
+        <span>{library.quizzes.length} quizzes</span>
       </div>
 
       {items.length === 0 ? (
         <section className="library-empty">
-          <h2>No saved {activeTab} yet</h2>
+          <h2>Your teaching library is ready</h2>
           <p>Generate a resource and choose Save to keep it here.</p>
-          <button onClick={() => setCurrentPage(activeTab === "lessons" ? "create-lesson" : "quiz")}>
-            Create {activeTab === "lessons" ? "a lesson" : "a quiz"}
-          </button>
+          <div className="library-empty-actions">
+            <button onClick={() => setCurrentPage("create-lesson")}>Create a lesson</button>
+            <button onClick={() => setCurrentPage("quiz")}>Create a quiz</button>
+          </div>
         </section>
       ) : (
         <section className="library-list">
-          {items.map((item) => (
-            <button className="library-item" key={item.id} onClick={() => setSelectedItem({ item, kind: activeTab === "lessons" ? "lesson" : "quiz" })}>
-              <div className="library-item-icon">{activeTab === "lessons" ? "L" : "Q"}</div>
+          {items.map(({ item, kind }) => (
+            <button className={`library-item ${kind}`} key={item.id} onClick={() => setSelectedItem({ item, kind })}>
+              <div className="library-item-icon">{kind === "lesson" ? "L" : "Q"}</div>
               <div>
                 <h2>{item.title || item.topic}</h2>
-                <p>{item.subject} · {item.grade} · {activeTab === "lessons" ? `${item.duration} min` : `${item.questions.length} questions`}</p>
+                <p>{kind === "lesson" ? "Lesson plan" : "Quiz"} · {item.subject} · {item.grade} · {kind === "lesson" ? `${item.duration} min` : `${item.questions.length} questions`}</p>
               </div>
               <time>{new Date(item.savedAt).toLocaleDateString()}</time>
               <span className="library-item-action">Open</span>
