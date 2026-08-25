@@ -44,7 +44,7 @@
 
   font-family: inherit;
 
-  font-size: 9px;
+  font-size: 12px;
 
   font-weight: 600;
 
@@ -99,7 +99,7 @@
 
   justify-content: center;
 
-  font-size: 18px;
+  font-size: 21px;
 
 }
 
@@ -108,7 +108,7 @@
 
   margin: 0;
 
-  font-size: 16px;
+  font-size: 19px;
 
   font-weight: 750;
 
@@ -121,7 +121,7 @@
 
   color: #9999a3;
 
-  font-size: 9px;
+  font-size: 12px;
 
 }
 
@@ -136,7 +136,7 @@
 
   color: #38865a;
 
-  font-size: 9px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -196,7 +196,7 @@
 
   color: #7041d5;
 
-  font-size: 9px;
+  font-size: 12px;
 
   font-weight: 750;
 
@@ -209,7 +209,7 @@
 
   margin: 7px 0;
 
-  font-size: 28px;
+  font-size: 31px;
 
   letter-spacing: -1px;
 
@@ -222,7 +222,7 @@
 
   color: #8b8c95;
 
-  font-size: 11px;
+  font-size: 14px;
 
 }
 
@@ -307,7 +307,7 @@
 
   margin: 0;
 
-  font-size: 13px;
+  font-size: 16px;
 
 }
 
@@ -318,7 +318,7 @@
 
   color: #9999a3;
 
-  font-size: 9px;
+  font-size: 12px;
 
 }
 
@@ -346,7 +346,7 @@
 
   color: #44454c;
 
-  font-size: 9px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -378,7 +378,7 @@
 
   font-family: inherit;
 
-  font-size: 10px;
+  font-size: 13px;
 
 }
 
@@ -414,7 +414,7 @@
 
   font-family: inherit;
 
-  font-size: 10px;
+  font-size: 13px;
 
   font-weight: 700;
 
@@ -473,7 +473,7 @@
 
   margin: 5px 0;
 
-  font-size: 22px;
+  font-size: 25px;
 
 }
 
@@ -484,7 +484,7 @@
 
   color: #91919b;
 
-  font-size: 9px;
+  font-size: 12px;
 
 }
 
@@ -503,7 +503,7 @@
 
   font-family: inherit;
 
-  font-size: 9px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -555,7 +555,7 @@
   border-radius: 7px;
   background: var(--accent-light);
   color: var(--accent);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 750;
 }
 
@@ -574,7 +574,7 @@
 
   font-family: inherit;
 
-  font-size: 8px;
+  font-size: 11px;
 
   cursor: pointer;
 
@@ -599,7 +599,7 @@
 
   font-family: inherit;
 
-  font-size: 10px;
+  font-size: 13px;
 
 }
 
@@ -657,7 +657,7 @@
   border-radius: 7px;
   background: var(--bg-alt);
   color: var(--text-mute);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -684,7 +684,7 @@
 
   font-family: inherit;
 
-  font-size: 9px;
+  font-size: 12px;
 
 }
 
@@ -694,7 +694,7 @@
   border-radius: 15px;
   background: var(--accent-light);
   color: var(--accent);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -711,7 +711,7 @@
   background: var(--accent-bg);
   color: var(--accent);
   font-family: inherit;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -770,7 +770,7 @@
 
   justify-content: center;
 
-  font-size: 23px;
+  font-size: 26px;
 
 }
 
@@ -779,7 +779,7 @@
 
   margin: 0;
 
-  font-size: 12px;
+  font-size: 15px;
 
 }
 
@@ -790,7 +790,7 @@
 
   color: #9999a3;
 
-  font-size: 9px;
+  font-size: 12px;
 
 }
 
@@ -849,7 +849,7 @@
 
   .quiz-intro h2 {
 
-    font-size: 22px;
+    font-size: 25px;
 
   }
 

@@ -60,7 +60,7 @@
 
 .library-header span {
   color: #7041d5;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 750;
   letter-spacing: 1px;
 }
@@ -73,7 +73,7 @@
 
 .library-header p {
   color: #878892;
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .library-summary {
@@ -83,14 +83,26 @@
   gap: 8px;
 }
 
-.library-summary span {
-  padding: 7px 10px;
-  border: 1px solid #e2dcef;
+.filter-btn {
+  padding: 10px 13px;
+  border: 1px solid var(--border);
   border-radius: 20px;
-  background: #faf8ff;
-  color: #7041d5;
-  font-size: 9px;
+  background: var(--bg-card);
+  color: var(--text-mute);
+  font-size: 15px;
   font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: var(--bg-alt);
+}
+
+.filter-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
 }
 
 .library-list {
@@ -129,32 +141,32 @@
   color: #7041d5;
   display: grid;
   place-items: center;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 800;
 }
 
 .library-item h2 {
   margin: 0;
   color: #303138;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .library-item p {
   margin-top: 4px;
   color: #92939c;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .library-item time {
   margin-left: auto;
   color: #a0a1a9;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .library-item-action {
   margin-left: auto;
   color: #7041d5;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -180,13 +192,13 @@
 
 .library-empty h2 {
   margin: 0;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .library-empty p {
   margin: 8px 0 18px;
   color: #9697a0;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .library-empty-actions {
@@ -229,7 +241,7 @@
 
 .resource-detail-heading span {
   color: #7041d5;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 750;
   letter-spacing: 1px;
 }
@@ -237,12 +249,12 @@
 .resource-detail-heading h1 {
   margin: 7px 0 4px;
   color: #25232b;
-  font-size: 24px;
+  font-size: 27px;
 }
 
 .resource-detail-heading p {
   color: #91919b;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .resource-detail-heading button {
@@ -273,14 +285,14 @@
 .saved-lesson-content h2 {
   margin: 0 0 8px;
   color: #403451;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .saved-lesson-content p,
 .saved-lesson-content li,
 .saved-quiz-content li {
   color: #75717d;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.6;
 }
 
@@ -299,13 +311,13 @@
 
 .saved-lesson-content article strong {
   color: #403451;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .saved-lesson-content article small {
   float: right;
   color: #7041d5;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .saved-lesson-content article p {
@@ -328,7 +340,7 @@
 
 .saved-visual-grid span {
   color: #8061c8;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -336,22 +348,22 @@
 .saved-visual-grid h3 {
   margin: 6px 0;
   color: #403451;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .saved-visual-grid p {
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .saved-quiz-content article>strong {
   color: #7041d5;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .saved-quiz-content h2 {
   margin: 8px 0;
   color: #38333f;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .saved-quiz-content ol {
@@ -362,7 +374,7 @@
 .saved-quiz-content p {
   margin-top: 10px;
   color: #318257;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -372,7 +384,7 @@
   }
 
   .library-header h1 {
-    font-size: 24px;
+    font-size: 27px;
   }
 
   .library-item {

@@ -57,7 +57,7 @@
 .brand-text h2 {
   margin: 0;
   font-family: var(--heading);
-  font-size: 19px;
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.6px;
   color: var(--text-h);
@@ -69,7 +69,7 @@
   margin-top: 1px;
 
   color: #92939c;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 
@@ -86,7 +86,7 @@
   margin: 0 10px 10px;
   color: var(--text-light);
   font-family: var(--sans);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 1.1px;
 }
@@ -108,7 +108,7 @@
   align-items: center;
   gap: 12px;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   text-align: left;
   cursor: pointer;
@@ -149,7 +149,7 @@
   justify-content: center;
   background: linear-gradient(135deg, var(--accent-light), var(--accent-dark));
   color: #ffffff;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 700;
   box-shadow: var(--shadow-sm);
 }
@@ -161,20 +161,20 @@
 
 .profile-details strong {
   color: #25252a;
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .profile-details span {
   margin-top: 2px;
 
   color: #999aa3;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .profile-details small {
   margin-top: 3px;
   color: #7041d5;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .profile-details .library-sync-error {
@@ -191,7 +191,7 @@
   background: #ffffff;
   color: #777781;
   font-family: inherit;
-  font-size: 7px;
+  font-size: 10px;
   cursor: pointer;
 }
 
@@ -222,7 +222,7 @@
 .header-label {
   margin: 0 0 6px;
   color: var(--text-light);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.8px;
 }
@@ -240,7 +240,7 @@
 .header-subtitle {
   margin: 8px 0 0;
   color: var(--text);
-  font-size: 14px;
+  font-size: 17px;
 }
 
 
@@ -254,7 +254,7 @@
   align-items: center;
   gap: 8px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-normal);
@@ -350,7 +350,7 @@
 
   gap: 6px;
 
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 700;
 
   letter-spacing: 0.8px;
@@ -358,6 +358,7 @@
 
 .hero-content h2 {
   margin: 0;
+  color: #ffffff;
   font-family: var(--heading);
   font-size: 36px;
   line-height: 1.15;
@@ -375,7 +376,7 @@
   max-width: 550px;
   margin: 14px 0 21px;
   color: #d1d5db;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.6;
 }
 
@@ -394,7 +395,7 @@
   gap: 8px;
 
   font-family: inherit;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
 
   cursor: pointer;
@@ -508,7 +509,7 @@
 
   gap: 7px;
 
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -591,7 +592,7 @@
 
   color: #858690;
 
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .stat-card strong {
@@ -601,7 +602,7 @@
 
   color: #19191e;
 
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .stat-card small {
@@ -614,7 +615,7 @@
 
   gap: 3px;
 
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .stat-card small.positive {
@@ -643,7 +644,7 @@
 
   color: #202126;
 
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -652,7 +653,7 @@
 
   color: #8c8d96;
 
-  font-size: 10px;
+  font-size: 13px;
 }
 
 
@@ -728,7 +729,7 @@
 
   color: #24252a;
 
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -739,7 +740,7 @@
 
   color: #8b8c95;
 
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -770,7 +771,7 @@
 
   font-family: inherit;
 
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
 
   cursor: pointer;
@@ -814,7 +815,7 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 19px;
+  font-size: 22px;
 }
 
 .lesson-info {
@@ -826,7 +827,7 @@
 
   color: #25262a;
 
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -839,7 +840,7 @@
 
   color: #92939c;
 
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .lesson-duration {
@@ -850,7 +851,7 @@
 
   color: #777984;
 
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .lesson-date {
@@ -858,7 +859,7 @@
 
   color: #a0a1a9;
 
-  font-size: 8px;
+  font-size: 11px;
 
   text-align: right;
 }
@@ -921,7 +922,7 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 17px;
+  font-size: 20px;
 }
 
 .tip-content {
@@ -931,7 +932,7 @@
 .tip-content strong {
   color: #302b3b;
 
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .tip-content p {
@@ -941,7 +942,7 @@
 
   color: #888493;
 
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -959,7 +960,7 @@
 
   font-family: inherit;
 
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
 
   cursor: pointer;
@@ -1071,7 +1072,7 @@
   }
 
   .dashboard-header h1 {
-    font-size: 24px;
+    font-size: 27px;
   }
 
   .create-button {
@@ -1087,7 +1088,7 @@
   }
 
   .hero-content h2 {
-    font-size: 27px;
+    font-size: 30px;
   }
 
   .stats-grid {

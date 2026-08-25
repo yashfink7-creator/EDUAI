@@ -231,14 +231,14 @@ function CreateLesson({ setCurrentPage, onSave, userId }) {
     setError("");
     try {
       const savedLesson = await saveLesson({
-      title: generatedLesson.title || formData.topic,
-      subject: formData.subject,
-      topic: formData.topic,
-      grade: formData.grade,
-      duration: formData.duration,
-      teachingStyle: formData.teachingStyle,
-      plan: generatedLesson,
-      savedAt: new Date().toISOString(),
+        title: generatedLesson.title || formData.topic,
+        subject: formData.subject,
+        topic: formData.topic,
+        grade: formData.grade,
+        duration: formData.duration,
+        teachingStyle: formData.teachingStyle,
+        plan: generatedLesson,
+        savedAt: new Date().toISOString(),
       }, userId);
 
       onSave("lessons", savedLesson);
@@ -793,101 +793,7 @@ function CreateLesson({ setCurrentPage, onSave, userId }) {
 
 
 
-          {/* =================================================
-              RIGHT SIDE
-          ================================================= */}
 
-          <aside className="lesson-side">
-
-
-            {/* AI Preview */}
-
-            <div className="ai-preview-card">
-
-              <div className="preview-header">
-
-                <div className="preview-icon">
-                  <Icon type="sparkles" size={17} />
-                </div>
-
-                <div>
-
-                  <h3>
-                    AI will create
-                  </h3>
-
-                  <p>
-                    Your lesson plan includes
-                  </p>
-
-                </div>
-
-              </div>
-
-
-              <div className="preview-list">
-
-                <div>
-                  <Icon type="check" size={15} />
-                  <span>Learning objectives</span>
-                </div>
-
-                <div>
-                  <Icon type="check" size={15} />
-                  <span>Lesson introduction</span>
-                </div>
-
-                <div>
-                  <Icon type="check" size={15} />
-                  <span>Teaching activities</span>
-                </div>
-
-                <div>
-                  <Icon type="check" size={15} />
-                  <span>Discussion questions</span>
-                </div>
-
-                <div>
-                  <Icon type="check" size={15} />
-                  <span>Assessment questions</span>
-                </div>
-
-                <div>
-                  <Icon type="check" size={15} />
-                  <span>Homework suggestions</span>
-                </div>
-
-              </div>
-
-            </div>
-
-
-            {/* Teaching Tip */}
-
-            <div className="tip-card">
-
-              <div className="tip-card-icon">
-                <Icon type="lightbulb" size={18} />
-              </div>
-
-              <div>
-
-                <strong>
-                  Pro tip
-                </strong>
-
-                <p>
-                  Be specific about what your students
-                  should achieve. EDUAI can create better
-                  activities when your objectives are clear.
-                </p>
-
-              </div>
-
-            </div>
-
-
-          </aside>
 
         </div>
 

@@ -2,11 +2,15 @@ import { useState } from "react";
 import "../styles/Library.css";
 
 function Library({ setCurrentPage, library }) {
+  const [filter, setFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState(null);
+
   const items = [
     ...library.lessons.map((item) => ({ item, kind: "lesson" })),
     ...library.quizzes.map((item) => ({ item, kind: "quiz" })),
   ].sort((first, second) => new Date(second.item.savedAt) - new Date(first.item.savedAt));
+
+  const filteredItems = items.filter(i => filter === "all" || i.kind === filter);
 
   if (selectedItem) {
     const isLesson = selectedItem.kind === "lesson";
@@ -53,11 +57,27 @@ function Library({ setCurrentPage, library }) {
       </header>
 
       <div className="library-summary">
-        <span>{library.lessons.length} lessons</span>
-        <span>{library.quizzes.length} quizzes</span>
+        <button
+          className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+          onClick={() => setFilter('all')}
+        >
+          All Resources
+        </button>
+        <button
+          className={`filter-btn ${filter === 'lesson' ? 'active' : ''}`}
+          onClick={() => setFilter('lesson')}
+        >
+          {library.lessons.length} Lessons
+        </button>
+        <button
+          className={`filter-btn ${filter === 'quiz' ? 'active' : ''}`}
+          onClick={() => setFilter('quiz')}
+        >
+          {library.quizzes.length} Quizzes
+        </button>
       </div>
 
-      {items.length === 0 ? (
+      {filteredItems.length === 0 ? (
         <section className="library-empty">
           <h2>Your teaching library is ready</h2>
           <p>Generate a resource and choose Save to keep it here.</p>
@@ -68,14 +88,14 @@ function Library({ setCurrentPage, library }) {
         </section>
       ) : (
         <section className="library-list">
-          {items.map(({ item, kind }) => (
-            <button className={`library-item ${kind}`} key={item.id} onClick={() => setSelectedItem({ item, kind })}>
+          {filteredItems.map(({ item, kind }) => (
+            <button className={`library-item ${kind}`} key={item.id || item.title || Object.values(item).join().substring(0, 5)} onClick={() => setSelectedItem({ item, kind })}>
               <div className="library-item-icon">{kind === "lesson" ? "L" : "Q"}</div>
               <div>
                 <h2>{item.title || item.topic}</h2>
                 <p>{kind === "lesson" ? "Lesson plan" : "Quiz"} · {item.subject} · {item.grade} · {kind === "lesson" ? `${item.duration} min` : `${item.questions.length} questions`}</p>
               </div>
-              <time>{new Date(item.savedAt).toLocaleDateString()}</time>
+              <time>{item.savedAt ? new Date(item.savedAt).toLocaleDateString() : 'N/A'}</time>
               <span className="library-item-action">Open</span>
             </button>
           ))}

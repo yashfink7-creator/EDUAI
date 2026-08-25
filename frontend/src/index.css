@@ -1,22 +1,33 @@
 :root {
   /* Colors */
-  --text: #4b5563; /* slate-600 */
-  --text-h: #111827; /* slate-900 */
-  --text-light: #9ca3af; /* slate-400 */
-  
-  --bg: #f8fafc; /* slate-50 */
+  --text: #4b5563;
+  /* slate-600 */
+  --text-h: #111827;
+  /* slate-900 */
+  --text-light: #9ca3af;
+  /* slate-400 */
+
+  --bg: #f8fafc;
+  /* slate-50 */
   --bg-card: #ffffff;
-  
-  --border: #e2e8f0; /* slate-200 */
-  --border-light: #f1f5f9; /* slate-100 */
-  
+
+  --border: #e2e8f0;
+  /* slate-200 */
+  --border-light: #f1f5f9;
+  /* slate-100 */
+
   --code-bg: #f1f5f9;
-  
-  --accent: #8b5cf6; /* violet-500 */
-  --accent-light: #a78bfa; /* violet-400 */
-  --accent-dark: #7c3aed; /* violet-600 */
-  --accent-bg: #f5f3ff; /* violet-50 */
-  --accent-border: #ede9fe; /* violet-100 */
+
+  --accent: #8b5cf6;
+  /* violet-500 */
+  --accent-light: #a78bfa;
+  /* violet-400 */
+  --accent-dark: #7c3aed;
+  /* violet-600 */
+  --accent-bg: #f5f3ff;
+  /* violet-50 */
+  --accent-border: #ede9fe;
+  /* violet-100 */
 
   /* Specific roles */
   --danger: #ef4444;
@@ -47,7 +58,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -84,7 +95,12 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--heading);
   font-weight: 600;
   color: var(--text-h);
@@ -115,13 +131,16 @@ a:hover {
   width: 8px;
   height: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #cbd5e1;
 }

@@ -163,7 +163,10 @@ DASHBOARD
 =========================================================
 */
 
-function Dashboard({ setCurrentPage, library, libraryLoading, libraryError, onSignOut }) {
+function Dashboard({ setCurrentPage, library, libraryLoading, libraryError, onSignOut, user }) {
+  // Extract display name or create a default fallback
+  const displayName = user?.user_metadata?.display_name || user?.email?.split("@")[0] || "Educator";
+
   return (
     <div className="dashboard">
 
@@ -252,12 +255,12 @@ function Dashboard({ setCurrentPage, library, libraryLoading, libraryError, onSi
         <div className="sidebar-profile">
 
           <div className="profile-avatar">
-            T
+            {displayName.charAt(0).toUpperCase()}
           </div>
 
           <div className="profile-details">
-            <strong>Teacher</strong>
-            <span>Educator</span>
+            <strong>{displayName}</strong>
+            <span>Educator Account</span>
             {libraryLoading && <small>Syncing library...</small>}
             {libraryError && <small className="library-sync-error">{libraryError}</small>}
           </div>
@@ -288,7 +291,7 @@ function Dashboard({ setCurrentPage, library, libraryLoading, libraryError, onSi
             </p>
 
             <h1>
-              Good morning, Teacher 👋
+              Good morning, {displayName} 👋
             </h1>
 
             <p className="header-subtitle">

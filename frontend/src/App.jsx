@@ -83,7 +83,7 @@ function App() {
     return <Library setCurrentPage={setCurrentPage} library={library} />;
   }
 
-  return <Dashboard setCurrentPage={setCurrentPage} library={library} libraryLoading={libraryLoading} libraryError={libraryError} onSignOut={handleSignOut} />;
+  return <Dashboard setCurrentPage={setCurrentPage} library={library} libraryLoading={libraryLoading} libraryError={libraryError} onSignOut={handleSignOut} user={session.user} />;
 }
 
 export default App;
